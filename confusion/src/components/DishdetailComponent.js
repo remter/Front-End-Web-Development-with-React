@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle  } from 'reactstrap';
 
 
@@ -58,7 +58,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle  } from 'r
 
     } 
     const DishDetail = (props) => {
-        if(this.props.dish != null){
+        if(props.dish != null){
         return(
             <div className="row">
                 <div className="col-12 col-md-5 m-1">
