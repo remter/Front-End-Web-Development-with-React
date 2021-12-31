@@ -24,7 +24,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
             );
         
     }
-    function RenderComments({comments}){
+    function RenderComments({comments, addComment, dishId}) {
         if(comments !=null){
         const com = comments.map((comment) =>{
             return (
@@ -52,6 +52,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                 <ul className = "list-unstyled">
                     {com}
                 </ul>
+                <CommentForm dishId={dishId} addComment={addComment} />
             </div>
         )
         }
@@ -86,8 +87,9 @@ const minLength = (len) => (val) => val && (val.length >= len);
             });
         }
         handleSubmit(values) {
-            console.log('Current State is: ' + JSON.stringify(values));
-            alert('Current State is: ' + JSON.stringify(values));
+            this.toggleModal()
+
+            this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
              
         }
         render(){
@@ -123,10 +125,10 @@ const minLength = (len) => (val) => val && (val.length >= len);
                                     </div>
                                     <div className="form-group">
                                         <div>
-                                            <Label className="font-weight-bold" htmlFor="name" >Your Name</Label>
+                                            <Label className="font-weight-bold" htmlFor="author" >Your Name</Label>
                                         </div>
                                         <div>
-                                            <Control.text model=".name" id="name" name="name"
+                                            <Control.text model=".author" id="author" name="author"
                                             placeholder="Your Name"
                                             className="form-control"
                                             validators={{
@@ -135,7 +137,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
                                             />
                                             <Errors
                                                 className="text-danger"
-                                                model=".name"
+                                                model=".author"
                                                 show="touched"
                                                 messages={{
                                                     minLength: 'Must be greater than 2 characters',
@@ -150,10 +152,10 @@ const minLength = (len) => (val) => val && (val.length >= len);
                                     
                                     <div className="form-group">
                                         <div>
-                                            <Label className="font-weight-bold" htmlFor="message" >Comment</Label>
+                                            <Label className="font-weight-bold" htmlFor="comment" >Comment</Label>
                                         </div>
                                         <div>
-                                            <Control.textarea model=".message" id="message" name="message"
+                                            <Control.textarea model=".comment" id="comment" name="comment"
                                                 rows="12"
                                                 className="form-control" />
                                         
@@ -198,8 +200,11 @@ const minLength = (len) => (val) => val && (val.length >= len);
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-5 m-1">
-                        <RenderComments comments={props.comments} />
-                        <CommentForm></CommentForm>
+                    <RenderComments comments={props.comments}
+                        addComment={props.addComment}
+                        dishId={props.dish.id}
+                    />
+                        
                     </div>
                 </div>
                 </div>
