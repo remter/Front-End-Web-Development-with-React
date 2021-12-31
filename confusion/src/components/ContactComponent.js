@@ -165,6 +165,15 @@ class Contact extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group">
+                                <Label htmlFor="message" md={2}>Your Feedback</Label>
+                                <Col md={10}>
+                                    <Control.textarea model=".message" id="message" name="message"
+                                        rows="12"
+                                        className="form-control" />
+                                </Col>
+                            </Row>
+
+                            <Row className="form-group">
                                 <Col md={{size:10, offset: 2}}>
                                     <Button type="submit" color="primary">
                                     Send Feedback
